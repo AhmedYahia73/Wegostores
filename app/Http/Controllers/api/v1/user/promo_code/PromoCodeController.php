@@ -19,6 +19,7 @@ class PromoCodeController extends Controller
         // code, plan[{plan_id, duration, price, price_discount, fees}], 
         // extra[{extra_id, duration, price, , price_discount, fees}], 
         // domain[{domain_id, price, , price_discount}]
+        // total_cart
         $promo_codes = $this->promo_codes
         ->where('code', $request->code)
         ->where('start_date', '<=', date('Y-m-d'))
@@ -51,7 +52,15 @@ class PromoCodeController extends Controller
 
         if ($request->plan) {
             foreach ($request->plan as $plan) { 
-                if (empty($request->user()->plan_id)) {
+                if (empty($request->user()->plan_id) && $promo_codes->promo_type == 'setup_fees') {
+                    if ($promo_codes->calculation_method == 'percentage') {
+                        $total += $plan['fees'] - $plan['fees'] * $promo_codes->amount / 100;
+                    } 
+                    else {
+                        $total += $plan['fees'] - $promo_codes->amount;
+                    } 
+                }
+                elseif (empty($request->user()->plan_id)) {
                     $total +=  $plan['fees'];
                 }
                 if ($promo_codes->promo_type == 'plan') {
@@ -63,7 +72,7 @@ class PromoCodeController extends Controller
                     }
                 }
                 else{
-                    $total += $plan['price_discount'];
+                    $total += $plan['price'] - $plan['price_discount'];
                 }
             }
         }
@@ -77,7 +86,15 @@ class PromoCodeController extends Controller
                     $query->where('status', '!=', 'rejected');
                 })
                 ->first();
-                if (empty($extras)) {
+                if (empty($extras) && $promo_codes->promo_type == 'setup_fees') {
+                    if ($promo_codes->calculation_method == 'percentage') {
+                        $total += $extra['fees'] - $extra['fees'] * $promo_codes->amount / 100;
+                    } 
+                    else {
+                        $total += $extra['fees'] - $promo_codes->amount;
+                    } 
+                }
+                elseif (empty($extras)) {
                     $total +=  $extra['fees'];
                 }
                 if ($promo_codes->promo_type == 'extra') {
@@ -89,7 +106,7 @@ class PromoCodeController extends Controller
                     }
                 }
                 else{
-                    $total += $plan['price_discount'];
+                    $total +=  $extra['price'] - $extra['price_discount'];
                 }
             }
         }
@@ -105,7 +122,7 @@ class PromoCodeController extends Controller
                     }
                 }
                 else{
-                    $total += $plan['price_discount'];
+                    $total += $domain['price'] - $domain['price_discount'];
                 }
             }
         }
@@ -113,6 +130,15 @@ class PromoCodeController extends Controller
         if ($promo_codes->promo_status == 'fixed') {
             $promo_codes->usage = $promo_codes->usage - 1;
             $promo_codes->save();
+        }
+        if ($promo_codes->promo_type == 'cart') {
+            $total = $request->total_cart;
+            if ($promo_codes->calculation_method == 'percentage') {
+                $total = $total  - $total * $promo_codes->amount / 100;
+            } 
+            else {
+                $total = $total - $promo_codes->amount;
+            }
         }
         $promo_codes->users()->attach($request->user()->id);
 

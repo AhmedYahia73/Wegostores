@@ -27,7 +27,7 @@ return new class extends Migration
             $table->boolean('semi_annual')->nullable();
             $table->boolean('yearly')->nullable();
             $table->boolean('monthly')->nullable();
-            $table->enum('promo_type', ['plan', 'extra', 'domain']);
+            $table->enum('promo_type', ['plan', 'extra', 'domain', 'cart', 'setup_fees']);
             $table->timestamps();
         });
     }

@@ -61,7 +61,7 @@ class PromoCodeController extends Controller
         // promoCode/update/{id}
         // code, title, calculation_method => [percentage, amount], user_type => [first_usage, renueve]
         // user_usage, usage, start_date, end_date, quarterly, semi_annual
-        // yearly, monthly, promo_type => [plan, extra, domain],
+        // yearly, monthly, promo_type => [plan, extra, domain, cart, setup_fees],
         // amount, promo_status => [fixed, unlimited]
         $promoCodeRequest = $request->only($this->prormoRequest);
         try {
