@@ -39,7 +39,7 @@ class PromoCodeRequest extends FormRequest
             'end_date'=>["required"],
             'amount' => ['numeric', 'nullable'],
             'promo_type' => ['required', 'in:plan,extra,domain,cart,setup_fees'],
-            'promo_status' => ['required', 'in:fixed,unlimited']
+            'promo_status' => ['required', 'in:fixed,unlimited'],
         ];
     }
 

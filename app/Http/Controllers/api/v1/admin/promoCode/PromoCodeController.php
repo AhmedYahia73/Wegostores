@@ -68,6 +68,11 @@ class PromoCodeController extends Controller
             $promoCode = $this->promoCode
             ->where('id', $id)
             ->first();
+            $promoCodeRequest['quarterly'] = $request->quarterly ?? 0;
+            $promoCodeRequest['semi_annual'] = $request->semi_annual ?? 0;
+            $promoCodeRequest['yearly'] = $request->yearly ?? 0;
+            $promoCodeRequest['monthly'] = $request->monthly ?? 0;
+            $promoCodeRequest['amount'] = $request->amount ?? 0;
             $promoCode->update($promoCodeRequest);
             return response()->json([
                 'promoCode.message'=>'PromoCode Updated Successfully',
