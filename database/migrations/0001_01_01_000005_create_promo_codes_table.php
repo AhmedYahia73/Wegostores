@@ -23,10 +23,10 @@ return new class extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->float('amount')->nullable();
-            $table->boolean('quarterly')->nullable();
-            $table->boolean('semi_annual')->nullable();
-            $table->boolean('yearly')->nullable();
-            $table->boolean('monthly')->nullable();
+            $table->float('quarterly')->nullable();
+            $table->float('semi_annual')->nullable();
+            $table->float('yearly')->nullable();
+            $table->float('monthly')->nullable();
             $table->enum('promo_type', ['plan', 'extra', 'domain', 'cart', 'setup_fees']);
             $table->timestamps();
         });
