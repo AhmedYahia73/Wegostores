@@ -20,6 +20,7 @@ use App\Http\Controllers\api\v1\admin\activity\ActivityController;
 use App\Http\Controllers\api\v1\admin\admin\AdminController;
 use App\Http\Controllers\api\v1\admin\welcome_offer\WelcomeOfferController;
 use App\Http\Controllers\api\v1\admin\contact_us\ContactUsController;
+use App\Http\Controllers\api\v1\admin\settings\AllowTimeController;
 use App\servic\PaymentPaymob;
 use App\services\PleskService;
 use Illuminate\Support\Facades\Route;
@@ -36,6 +37,12 @@ Route::controller(DomainController::class)->prefix('domains')->group(function ()
     Route::get('/', 'domains_pending')->name('domains.domains_pending');
     Route::put('approve/{id}', 'approve_domain')->name('domains.approve_domain');
     Route::put('rejected/{id}', 'rejected_domain')->name('domains.rejected_domain');
+});
+
+Route::controller(AllowTimeController::class)->prefix('allow_time')
+->group(function () {
+    Route::get('/', 'view')->name('allow_time.view');
+    Route::post('/update', 'modify')->name('allow_time.modify');
 });
 
 Route::controller(WelcomeOfferController::class)->prefix('welcome_offer')
