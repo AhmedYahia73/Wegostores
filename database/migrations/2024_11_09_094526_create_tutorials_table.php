@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('tutorials', function (Blueprint $table) {
-            $table->id();
-            $table->string('title')->nullable();
-            $table->text('description')->nullable();
-            $table->string('video');
-            $table->foreignId('tutorial_group_id')->constrained('tutorial_groups')->cascadeOnDelete()->cascadeOnUpdate();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('tutorials')) {
+            Schema::create('tutorials', function (Blueprint $table) {
+                $table->id();
+                $table->string('title')->nullable();
+                $table->text('description')->nullable();
+                $table->string('video');
+                $table->foreignId('tutorial_group_id')->constrained('tutorial_groups')->cascadeOnDelete()->cascadeOnUpdate();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

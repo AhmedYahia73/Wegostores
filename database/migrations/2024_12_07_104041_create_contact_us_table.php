@@ -11,13 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('contact_us', function (Blueprint $table) {
-            $table->id();
-            $table->string('email')->nullable();
-            $table->string('phone')->nullable();
-            $table->string('watts_app')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('contact_us')) {
+            Schema::create('contact_us', function (Blueprint $table) {
+                $table->id();
+                $table->string('email')->nullable();
+                $table->string('phone')->nullable();
+                $table->string('watts_app')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

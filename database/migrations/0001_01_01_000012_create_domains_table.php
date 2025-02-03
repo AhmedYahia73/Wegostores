@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('domains', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->foreignId('store_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
-            $table->boolean('status')->nullable();
-            $table->float('price')->nullable();
-            $table->boolean('price_status')->nullable();
-            $table->date('renewdate')->nullable();
-            $table->text('rejected_reason')->nullable();
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('domains')) {
+            Schema::create('domains', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->foreignId('user_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->foreignId('store_id')->constrained()->cascadeOnDelete()->cascadeOnUpdate();
+                $table->boolean('status')->nullable();
+                $table->float('price')->nullable();
+                $table->boolean('price_status')->nullable();
+                $table->date('renewdate')->nullable();
+                $table->text('rejected_reason')->nullable();
+                $table->timestamps();
+            });
+        }
     }
 
     /**

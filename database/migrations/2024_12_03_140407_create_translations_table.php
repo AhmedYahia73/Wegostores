@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('translations', function (Blueprint $table) {
-            $table->id();
-              $table->string('locale')->index(); // e.g., 'en', 'ar'
-              $table->morphs('translatable'); // Adds `translatable_type` and `translatable_id`
-              $table->string('key'); // Translation key
-              $table->text('value'); // Translated  value
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('translations')) {
+            Schema::create('translations', function (Blueprint $table) {
+                $table->id();
+                $table->string('locale')->index(); // e.g., 'en', 'ar'
+                $table->morphs('translatable'); // Adds `translatable_type` and `translatable_id`
+                $table->string('key'); // Translation key
+                $table->text('value'); // Translated  value
+                $table->timestamps();
+            });
+        }
     }
 
     /**

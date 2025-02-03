@@ -11,18 +11,20 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('plans', function (Blueprint $table) {
-            $table->id();
-            $table->string('name',255);
-            $table->text('title')->nullable();
-            $table->enum('fixed',[0,1])->default(1);
-            $table->integer('limet_store')->nullable();
-            $table->longText('image')->nullable();
-            $table->longText('description');
-            $table->float('setup_fees');
-            $table->enum('app',[0,1]); // Have Application or No
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('plans')) {
+            Schema::create('plans', function (Blueprint $table) {
+                $table->id();
+                $table->string('name',255);
+                $table->text('title')->nullable();
+                $table->enum('fixed',[0,1])->default(1);
+                $table->integer('limet_store')->nullable();
+                $table->longText('image')->nullable();
+                $table->longText('description');
+                $table->float('setup_fees');
+                $table->enum('app',[0,1]); // Have Application or No
+                $table->timestamps();
+            });
+        }
     }
 
     /**

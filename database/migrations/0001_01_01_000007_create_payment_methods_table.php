@@ -11,14 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('payment_methods', function (Blueprint $table) {
-            $table->id();
-            $table->string('name');
-            $table->longText('description');
-            $table->longText('thumbnail');
-            $table->enum('status',[0,1])->default(1);
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('payment_methods')) {
+            Schema::create('payment_methods', function (Blueprint $table) {
+                $table->id();
+                $table->string('name');
+                $table->longText('description');
+                $table->longText('thumbnail');
+                $table->enum('status',[0,1])->default(1);
+                $table->timestamps();
+            });
+        }
     }
 
     /**

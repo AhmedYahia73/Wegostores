@@ -11,16 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('welcome_offers', function (Blueprint $table) {
-            $table->id();
-            $table->string('ar_image')->nullable();
-            $table->string('en_image')->nullable(); 
-            $table->foreignId('plan_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
-            $table->string('duration');
-            $table->float('price');
-            $table->boolean('status');
-            $table->timestamps();
-        });
+        if (!Schema::hasTable('welcome_offers')) {
+            Schema::create('welcome_offers', function (Blueprint $table) {
+                $table->id();
+                $table->string('ar_image')->nullable();
+                $table->string('en_image')->nullable(); 
+                $table->foreignId('plan_id')->nullable()->constrained()->onUpdate('cascade')->onDelete('cascade');
+                $table->string('duration');
+                $table->float('price');
+                $table->boolean('status');
+                $table->timestamps();
+            });
+        }
     }
 
     /**
