@@ -25,6 +25,8 @@ use App\Http\Controllers\api\v1\user\my_service\MyServiceController;
 
 use App\Http\Controllers\api\v1\user\promo_code\PromoCodeController;
 
+use App\Http\Controllers\api\v1\user\invoice\InvoiceController;
+
 use App\Http\Controllers\api\v1\user\contact_us\ContactUsController;
 use App\Http\Controllers\api\v1\user\domain\DomainController;
 use App\Http\Controllers\api\v1\user\welcome_offer\WelcomeOfferController;
@@ -46,6 +48,11 @@ Route::prefix('/v1')->group(function () {
     Route::prefix('/contact_us')->group(function () {
         Route::controller(ContactUsController::class)->group(function () {
             Route::get(uri:'/',action:'view')->name(name:'contact_us.view');
+        });
+    });
+    Route::prefix('/invoice')->group(function () {
+        Route::controller(InvoiceController::class)->group(function () {
+            Route::get(uri:'/',action:'invoice')->name(name:'invoice.invoice');
         });
     });
     Route::prefix('/welcome_offer')->group(function () {
