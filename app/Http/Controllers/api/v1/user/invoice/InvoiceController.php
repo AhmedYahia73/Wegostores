@@ -41,7 +41,7 @@ class InvoiceController extends Controller
         $allow_date = null;
         if (!empty($expire_date)) {
             $expire_date =  Carbon::parse($expire_date);
-            $allow_date = (clone $expire_date)->addDays($days);
+            $allow_date = (clone $expire_date)->addDays(intval($days));
             $expire_date = $expire_date->format('Y-m-d');
             $allow_date = $allow_date->format('Y-m-d');
         } 
