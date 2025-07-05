@@ -74,7 +74,6 @@ Route::controller(SubscriptionController::class)->prefix('subscripe')
     Route::controller(UserSMSPackageControlle::class)->prefix('user_sms')->group(function () {
         Route::get('/', 'view')->name('user_sms.view');
         Route::get('/item/{id}', 'user_sms')->name('user_sms.view_item');
-        Route::put('/status/{id}', 'status')->name('user_sms.status');
         Route::post('/add', 'create')->name('user_sms.store');
         Route::post('/update/{id}', 'modify')->name('user_sms.modify');
         Route::delete('/delete/{id}', 'delete')->name('user_sms.delete');
