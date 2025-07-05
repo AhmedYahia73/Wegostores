@@ -21,6 +21,7 @@ use App\Http\Controllers\api\v1\admin\admin\AdminController;
 use App\Http\Controllers\api\v1\admin\welcome_offer\WelcomeOfferController;
 use App\Http\Controllers\api\v1\admin\contact_us\ContactUsController;
 use App\Http\Controllers\api\v1\admin\settings\AllowTimeController;
+use App\Http\Controllers\api\v1\admin\SMSPackage\SMSPackageController;
 use App\servic\PaymentPaymob;
 use App\services\PleskService;
 use Illuminate\Support\Facades\Route;
@@ -68,6 +69,15 @@ Route::controller(SubscriptionController::class)->prefix('subscripe')
     Route::post('/update', 'modify')->name('subscripe.modify');
     Route::delete('/delete/{id}', 'delete')->name('subscripe.delete');
 });
+
+    Route::controller(SMSPackageController::class)->prefix('sms_packages')->group(function () {
+        Route::get('/', 'view')->name('sms_packages.view');
+        Route::get('/item/{id}', 'sms_package')->name('sms_packages.view_item');
+        Route::put('/status/{id}', 'status')->name('sms_packages.status');
+        Route::post('/add', 'create')->name('sms_packages.store');
+        Route::post('/update/{id}', 'modify')->name('sms_packages.modify');
+        Route::delete('/delete/{id}', 'delete')->name('sms_packages.delete');
+    });
 
     Route::controller(ActivityController::class)->prefix('activity')->group(function () {
         Route::get('/', 'view')->name('activity.view');
