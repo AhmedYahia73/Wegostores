@@ -86,7 +86,7 @@ class UserSMSPackageControlle extends Controller
         $sms_packages = $this->sms_packages
         ->where('id', $request->sms_package_id)
         ->first();
-        $to = Carbon::parse($sms_packages)->addMonth($sms_packages->months)->format('Y-m-d');
+        $to = Carbon::parse($sms_packages->from)->addMonth($sms_packages->months)->format('Y-m-d');
         $this->user_sms
         ->create([
             'name' => $request->name,
