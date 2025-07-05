@@ -103,7 +103,7 @@ class SMSPackageController extends Controller
     public function delete(Request $request, $id){
         $this->sms_packages
         ->where('id', $id)
-        ->delete($smsRequest);
+        ->delete();
 
         return response()->json([
             'success' => 'You delete data success'
