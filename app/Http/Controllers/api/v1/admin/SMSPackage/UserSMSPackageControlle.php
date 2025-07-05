@@ -93,6 +93,7 @@ class UserSMSPackageControlle extends Controller
             'msg_number' => $sms_packages->msg_number,
             'back_link' => $request->back_link,
             'sms_package_id' => $request->sms_package_id,
+            'from' => $sms_packages->from,
             'to' => $to,
         ]);
 
