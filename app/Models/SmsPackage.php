@@ -12,6 +12,7 @@ class SmsPackage extends Model
         'months',
         'price',
         'discount',
+        'msg_number',
         'discount_type',
         'status',
     ];
