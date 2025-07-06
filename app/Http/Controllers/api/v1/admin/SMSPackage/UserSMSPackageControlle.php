@@ -31,6 +31,7 @@ class UserSMSPackageControlle extends Controller
         ->get();
         $user_sms = $this->user_sms
         ->orderByDesc('id')
+        ->with(['sms_package:id,name'])
         ->get();
 
         return response()->json([
@@ -42,6 +43,7 @@ class UserSMSPackageControlle extends Controller
     public function user_sms(Request $request, $id){
         $user_sms = $this->user_sms
         ->where('id', $id)
+        ->with(['sms_package:id,name'])
         ->first();
 
         return response()->json([

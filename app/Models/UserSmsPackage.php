@@ -14,4 +14,8 @@ class UserSmsPackage extends Model
         'from',
         'to',
     ];
+
+    public function sms_package(){
+        return $this->belongsTo(SmsPackage::class, 'sms_package_id');
+    }
 }
