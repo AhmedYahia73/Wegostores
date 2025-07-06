@@ -50,11 +50,11 @@ Route::controller(AllowTimeController::class)->prefix('allow_time')
 
 Route::controller(UserSubscriptionController::class)->prefix('subscription')
 ->group(function () {
-    Route::get('/', 'view')->name('subscription.view');
-    Route::get('/item/{id}', 'user_sms')->name('subscription.user_sms');
-    Route::post('/add', 'create')->name('subscription.create');
-    Route::post('/update/{id}', 'modify')->name('subscription.modify');
-    Route::delete('/delete/{id}', 'delete')->name('subscription.delete');
+    Route::get('/', 'view')->name('user_subscription.view');
+    Route::get('/item/{id}', 'user_subscription')->name('user_subscription.user_sms');
+    Route::post('/add', 'create')->name('user_subscription.create');
+    Route::post('/update/{id}', 'modify')->name('user_subscription.modify');
+    Route::delete('/delete/{id}', 'delete')->name('user_subscription.delete');
 });
 
 Route::controller(WelcomeOfferController::class)->prefix('welcome_offer')

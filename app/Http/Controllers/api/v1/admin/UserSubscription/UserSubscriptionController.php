@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Carbon\Carbon;
 
-use App\Models\UserSmsPackage;
+use App\Models\UserSubscription;
 
 class UserSubscriptionController extends Controller
 {
@@ -22,7 +22,7 @@ class UserSubscriptionController extends Controller
         ]);
     }
 
-    public function user_sms(Request $request, $id){
+    public function user_subscription(Request $request, $id){
         $user_subscription = $this->user_subscription
         ->where('id', $id)
         ->first();
