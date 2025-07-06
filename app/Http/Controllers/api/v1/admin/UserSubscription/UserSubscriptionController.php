@@ -35,8 +35,9 @@ class UserSubscriptionController extends Controller
     public function create(Request $request){
         $validator = Validator::make($request->all(), [
             'name' => ['required'] ,
-            'sms_package_id' => ['required', 'exists:sms_packages,id'] ,
             'back_link' => ['required'] ,
+            'from' => ['required', 'date'] ,
+            'to' => ['required', 'date'] ,
         ]);
         if ($validator->fails()) { // if Validate Make Error Return Message Error
             return response()->json([
@@ -60,7 +61,8 @@ class UserSubscriptionController extends Controller
     public function modify(Request $request, $id){
         $validator = Validator::make($request->all(), [
             'name' => ['required'] ,
-            'sms_package_id' => ['required', 'exists:sms_packages,id'] ,
+            'from' => ['required', 'date'] ,
+            'to' => ['required', 'date'] ,
             'back_link' => ['required'] ,
         ]);
         if ($validator->fails()) { // if Validate Make Error Return Message Error
