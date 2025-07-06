@@ -15,6 +15,16 @@ class UserSMSPackageControlle extends Controller
     public function __construct(private SmsPackage $sms_packages,
     private UserSmsPackage $user_sms){}
 
+    public function my_package(Request $request){ 
+        $user_sms = $this->user_sms
+        ->orderByDesc('id')
+        ->get();
+
+        return response()->json([
+            'user_sms' => $user_sms,
+        ]);
+    }
+
     public function view(Request $request){
         $sms_packages = $this->sms_packages
         ->where('status', 1)

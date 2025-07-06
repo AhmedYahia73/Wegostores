@@ -22,6 +22,15 @@ class UserSubscriptionController extends Controller
         ]);
     }
 
+    public function my_package(Request $request){ 
+        $user_subscription = $this->user_subscription
+        ->get();
+
+        return response()->json([
+            'user_subscription' => $user_subscription,
+        ]);
+    }
+
     public function user_subscription(Request $request, $id){
         $user_subscription = $this->user_subscription
         ->where('id', $id)

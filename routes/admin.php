@@ -32,6 +32,9 @@ Route::prefix('/v1')->group(function () {
     // Route::withoutMiddleware()->group(function () { // When Need Make any Request Without Middleware
 
     // });
+    Route::get('my_sms_package', [UserSMSPackageControlle::class, 'my_package'])->withoutMiddleware(['api', 'IsAdmin', 'auth:sanctum']);
+    Route::get('my_domain_package', [UserSubscriptionController::class, 'my_package'])->withoutMiddleware(['api', 'IsAdmin', 'auth:sanctum']);
+
     Route::controller(HomeController::class)->prefix('home')->group(function () {
         Route::get('/', 'home')->name('home.home'); // Store Home
     });
