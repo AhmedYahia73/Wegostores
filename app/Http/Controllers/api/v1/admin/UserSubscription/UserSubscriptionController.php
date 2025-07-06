@@ -49,8 +49,8 @@ class UserSubscriptionController extends Controller
         ->create([
             'name' => $request->name,
             'back_link' => $request->back_link,
-            'from' => $from,
-            'to' => $to,
+            'from' => $request->from,
+            'to' => $request->to,
         ]);
 
         return response()->json([
@@ -76,7 +76,7 @@ class UserSubscriptionController extends Controller
         ->update([
             'name' => $request->name,
             'back_link' => $request->back_link,
-            'to' => $to,
+            'to' => $request->to,
         ]);
 
         return response()->json([
