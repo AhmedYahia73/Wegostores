@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\api\v1\auth\AuthController;
+use App\Http\Controllers\api\v1\admin\cashier\CashierController;
 
 use App\services\PleskService;
 use Illuminate\Http\Request;
@@ -10,6 +11,10 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
+
+Route::controller(CashierController::class)->prefix('cashier')->group(function () {
+    Route::post('login', 'pos_login')->name('cashier.pos_login');
+});
 
 Route::controller(AuthController::class)->prefix('v1/auth/')->group(function () {
     Route::post('login', 'auth')->name('auth.login');

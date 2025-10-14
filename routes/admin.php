@@ -24,6 +24,7 @@ use App\Http\Controllers\api\v1\admin\settings\AllowTimeController;
 use App\Http\Controllers\api\v1\admin\SMSPackage\SMSPackageController;
 use App\Http\Controllers\api\v1\admin\SMSPackage\UserSMSPackageControlle;
 use App\Http\Controllers\api\v1\admin\UserSubscription\UserSubscriptionController;
+use App\Http\Controllers\api\v1\admin\POS\POSController;
 use App\servic\PaymentPaymob;
 use App\services\PleskService;
 use Illuminate\Support\Facades\Route;
@@ -38,6 +39,13 @@ Route::prefix('/v1')->group(function () {
     Route::controller(HomeController::class)->prefix('home')->group(function () {
         Route::get('/', 'home')->name('home.home'); // Store Home
     });
+
+Route::controller(POSController::class)->prefix('pos')->group(function () {
+    Route::get('/', 'view')->name('pos.view');
+    Route::post('/add', 'create')->name('pos.create');
+    Route::put('/update/{id}', 'modify')->name('pos.modify');
+    Route::delete('/delete/{id}', 'delete')->name('pos.delete');
+});
 
 Route::controller(DomainController::class)->prefix('domains')->group(function () {
     Route::get('/', 'domains_pending')->name('domains.domains_pending');
