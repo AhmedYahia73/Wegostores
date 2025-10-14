@@ -23,7 +23,7 @@ class CashierController extends Controller
         where("restuarant_id", $request->restuarant_id)
         ->where("status", 1)
         ->first();
-        if(empty($request)){
+        if(empty($resurant)){
             return response()->json([
                 "errors" => "Resurant ID is wrong"
             ], 400);
