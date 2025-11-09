@@ -76,7 +76,7 @@ class ClientDomainController extends Controller
             ], 400);
         }
         if ($request->img && !is_string($request->img)) {
-            $image = $this->imageUpdate($request, $client_domain->img,'img','admin/client_domain');
+            $image = $this->imageUpdate($request, $client_domain,'img','admin/client_domain');
             $domainRequest['img'] = $image;
         }
         $client_domain
