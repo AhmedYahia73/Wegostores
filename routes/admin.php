@@ -25,6 +25,7 @@ use App\Http\Controllers\api\v1\admin\SMSPackage\SMSPackageController;
 use App\Http\Controllers\api\v1\admin\SMSPackage\UserSMSPackageControlle;
 use App\Http\Controllers\api\v1\admin\UserSubscription\UserSubscriptionController;
 use App\Http\Controllers\api\v1\admin\POS\POSController;
+use App\Http\Controllers\api\v1\admin\client_domain\ClientDomainController;
 use App\servic\PaymentPaymob;
 use App\services\PleskService;
 use Illuminate\Support\Facades\Route;
@@ -39,6 +40,13 @@ Route::prefix('/v1')->group(function () {
     Route::controller(HomeController::class)->prefix('home')->group(function () {
         Route::get('/', 'home')->name('home.home'); // Store Home
     });
+
+Route::controller(ClientDomainController::class)->prefix('client_domian')->group(function () {
+    Route::get('/', 'view')->name('client_domain.view');
+    Route::post('/add', 'create')->name('client_domain.create');
+    Route::post('/update/{id}', 'modify')->name('client_domain.modify');
+    Route::delete('/delete/{id}', 'delete')->name('client_domain.delete');
+});
 
 Route::controller(POSController::class)->prefix('pos')->group(function () {
     Route::get('/', 'view')->name('pos.view');
