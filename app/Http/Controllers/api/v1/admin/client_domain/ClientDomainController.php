@@ -52,7 +52,6 @@ class ClientDomainController extends Controller
 
     public function modify(Request $request, $id){
         $validator = Validator::make($request->all(), [
-            'img' => ['required'],
             'alt' => ['required'],
             'website' => ['required'],
             'facaebook' => ['required'],
