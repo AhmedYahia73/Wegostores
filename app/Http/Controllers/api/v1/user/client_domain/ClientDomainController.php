@@ -30,6 +30,7 @@ class ClientDomainController extends Controller
 
     public function domains(Request $request){
         $domains = $this->domain
+        ->where('is_client', 0)
         ->get()
         ->map(function($item){
             return [
