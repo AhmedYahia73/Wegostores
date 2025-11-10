@@ -16,7 +16,20 @@ class ClientDomainController extends Controller
 
     public function view(Request $request){
         $client_domain = $this->client_domain
-        ->get();
+        ->get()
+        ->map(function($item){
+            return [
+                'id' => $item->id,
+                'img' => url('storage/' . $item->img),
+                'alt' => $item->alt,
+                'website' => $item->website,
+                'facaebook' => $item->facaebook,
+                'app_status' => $item->app_status,
+                'is_client' => $item->is_client,
+                'ios' => $item->ios,
+                'android' => $item->android,
+            ];
+        });
 
         return response()->json([
             'client_domain' => $client_domain
