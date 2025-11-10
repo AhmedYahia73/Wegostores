@@ -30,6 +30,14 @@ use App\Http\Controllers\api\v1\user\invoice\InvoiceController;
 use App\Http\Controllers\api\v1\user\contact_us\ContactUsController;
 use App\Http\Controllers\api\v1\user\domain\DomainController;
 use App\Http\Controllers\api\v1\user\welcome_offer\WelcomeOfferController;
+use App\Http\Controllers\api\v1\user\client_domain\ClientDomainController;
+
+Route::controller(ClientDomainController::class)
+->prefix('domain')->group(function () {
+    Route::get(uri:'/',action:'domains')->name(name:'domain.view');
+    Route::get(uri:'/client',action:'client')->name(name:'domain.view');
+    Route::get(uri:'/client_domains',action:'client_domains')->name(name:'domain.view');
+});
 
 Route::prefix('/v1')->group(function () {
     Route::withoutMiddleware(['IsUser','auth:sanctum'])->group(function () { // This All Route out Of Middleware User
