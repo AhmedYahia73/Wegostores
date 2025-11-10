@@ -83,7 +83,7 @@ class ClientDomainController extends Controller
         $client_domain = $this->client_domain
         ->where("id", $id)
         ->first();
-        if(!$request->img){
+        if(!$client_domain){
             return response()->json([
                 'errors' => 'id is wrong'
             ], 400);
